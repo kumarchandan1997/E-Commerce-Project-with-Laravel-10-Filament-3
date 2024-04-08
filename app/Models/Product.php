@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
+use App\Models\Subcategory;
 use App\Models\Brand;
 use App\Models\OrderItem;
 
@@ -24,6 +25,7 @@ class Product extends Model
         'is_featured',
         'in_stock',
         'on_sale',
+        'sub_category'
     ];
 
     protected $casts = ['images' => 'array'];
@@ -31,6 +33,11 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function subcategory()
+    {
+        return $this->belongsTo(Subcategory::class);
     }
 
     public function brand()

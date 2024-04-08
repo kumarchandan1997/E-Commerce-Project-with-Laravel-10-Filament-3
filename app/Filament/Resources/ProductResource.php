@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
+use App\Models\Subcategory;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Group;
@@ -29,7 +30,7 @@ class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
     protected static ?string $recordTitleAttribute = 'name';
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 5;
 
     protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
 
@@ -79,10 +80,25 @@ class ProductResource extends Resource
                     ]),
                     Section::make('Associations')->schema([
                         Select::make('category_id')
-                        ->required()
-                        ->searchable()
-                        ->preload()
-                        ->relationship('category','name'),
+                            ->relationship('category','name')
+                            ->searchable()
+                            ->preload()
+                            ->required()
+                            ->distinct()
+                            ->disableOptionsWhenSelectedInSiblingRepeaterItems()
+                            // ->columnSpan(4)
+                            ->reactive()
+                            ->afterStateUpdated(function ($state, Set $set) {
+                                $subcategory = Subcategory::where('category_id',$state)->first();
+                                $subCategoryName = $subcategory ? $subcategory->id : 0;
+                                $set('sub_category', $subCategoryName);
+                            }),
+
+
+                        // Select::make('sub_category')
+                        // ->label('Sub-Category')
+                        // ->options(Subcategory::where('category_id','sub_category')->pluck('name', 'id'))
+                        // ->searchable(),
 
                         Select::make('brand_id')
                         ->required()
