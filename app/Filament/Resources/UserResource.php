@@ -17,6 +17,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Select;
 
 class UserResource extends Resource
 {
@@ -40,6 +41,11 @@ class UserResource extends Resource
 
                 DatePicker::make('email_verified_at')->label("Email Verified At")
                 ->default(now()),
+                Select::make('theme')
+                    ->options([
+                        'theme1' => 'Theme1',
+                        'theme2' => 'Theme2',
+                    ]),
 
                 TextInput::make('password')->password()
                 ->dehydrated(fn($state) => filled($state)),
@@ -52,6 +58,7 @@ class UserResource extends Resource
             ->columns([
                 TextColumn::make("name")->searchable(),
                 TextColumn::make('email')->searchable(),
+                TextColumn::make('theme')->searchable(),
                 TextColumn::make('email_verified_at')->dateTime()->sortable(),
                 TextColumn::make('created_at')->dateTime()->sortable(),
             ])

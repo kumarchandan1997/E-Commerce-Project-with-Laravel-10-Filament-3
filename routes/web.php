@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use App\Livewire\Auth\ForgotPasswordPage;
 use App\Livewire\Auth\LoginPage;
 use App\Livewire\Auth\RegisterPage;
@@ -27,9 +28,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
 
 Route::get('/',HomePage::class);
 Route::get('/categories',CategoriesPage::class);
@@ -39,6 +38,7 @@ Route::get('/checkout',CheckoutPage::class);
 Route::get('/my-orders',MyOrdersPage::class);
 Route::get('/products/{slug}',ProductDetailPage::class);
 Route::get('/my-orders/{order}',MyOrderDetailPage::class);
+Route::get('/theme1',[UserController::class,'theme']);
 
 //login
 Route::get('/login',LoginPage::class);
