@@ -15,15 +15,14 @@ class ProductDetailPage extends Component
 
     public function mount($slug)
     {
-      $this->slug = $slug;
+        $this->slug = $slug;
     }
 
     public function render()
     {
-        $productDetails = Product::where('slug',$this->slug)->firstOrFail();
-        dd($productDetails);
+        $products = Product::where('slug',$this->slug)->first();
         return view('livewire.product-detail-page',[
-            'products' => $productDetails
+            'products' => $products
         ]);
     }
 }

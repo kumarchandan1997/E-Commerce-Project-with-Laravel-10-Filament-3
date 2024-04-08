@@ -8,8 +8,8 @@
                 <img x-bind:src="mainImage" alt="" class="object-cover w-full lg:h-full ">
               </div>
               <div class="flex-wrap hidden md:flex ">
-                <div class="w-1/2 p-2 sm:w-1/4" x-on:click="mainImage='https://m.media-amazon.com/images/I/71f5Eu5lJSL._SX679_.jpg'">
-                  <img src="https://m.media-amazon.com/images/I/71f5Eu5lJSL._SX679_.jpg" alt="" class="object-cover w-full lg:h-20 cursor-pointer hover:border hover:border-blue-500">
+                <div class="w-1/2 p-2 sm:w-1/4" x-on:click="mainImage='{{url('storage',$products->images)}}'">
+                  <img src="{{url('storage',$products->images)}}" alt="{{$products->name}}" class="object-cover w-full lg:h-20 cursor-pointer hover:border hover:border-blue-500">
                 </div>
 
                 <div class="w-1/2 p-2 sm:w-1/4" x-on:click="mainImage='https://m.media-amazon.com/images/I/61XPhYGQOQL._SX679_.jpg'">
@@ -38,15 +38,13 @@
             <div class="lg:pl-20">
               <div class="mb-8 ">
                 <h2 class="max-w-xl mb-6 text-2xl font-bold dark:text-gray-400 md:text-4xl">
-                  Macbook Pro M130c90</h2>
+                  {{$products->name}}</h2>
                 <p class="inline-block mb-6 text-4xl font-bold text-gray-700 dark:text-gray-400 ">
-                  <span>$1500.99</span>
+                  <span>{{Number::currency($products->price , 'INR')}}</span>
                   <span class="text-base font-normal text-gray-500 line-through dark:text-gray-400">$1800.99</span>
                 </p>
                 <p class="max-w-md text-gray-700 dark:text-gray-400">
-                  Lorem ispum dor amet Lorem ispum dor amet Lorem ispum dor amet Lorem ispum dor amet
-                  Lorem ispum dor amet Lorem ispum dor amet Lorem ispum dor amet Lorem ispum dor amet
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta eligendi esse laboriosam ex hic magni inventore dolores numquam, veniam totam ratione iusto explicabo accusamus, sit alias, architecto voluptate officiis quaerat?
+                  {{$products->description}}
                 </p>
               </div>
               <div class="w-32 mb-8 ">
