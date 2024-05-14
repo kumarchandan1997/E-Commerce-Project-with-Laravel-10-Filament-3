@@ -95,10 +95,10 @@ class ProductResource extends Resource
                             }),
 
 
-                        // Select::make('sub_category')
-                        // ->label('Sub-Category')
-                        // ->options(Subcategory::where('category_id','sub_category')->pluck('name', 'id'))
-                        // ->searchable(),
+                        Select::make('sub_category')
+                        ->label('Sub-Category')
+                        ->options(Subcategory::where('category_id','sub_category')->pluck('name', 'id'))
+                        ->searchable(),
 
                         Select::make('brand_id')
                         ->required()
